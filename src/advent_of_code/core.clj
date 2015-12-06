@@ -1,7 +1,12 @@
 (ns advent-of-code.core
-  (:gen-class))
+  (:require [advent-of-code.day1 :as day1]))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (if (= (count args) 1)
+    (let [namespace (symbol (str "advent-of-code." (first args)))]
+      (do
+        (require namespace)
+        (let [day (find-ns namespace)]
+          ((ns-resolve day 'challenge)))))
+    (println "Specify the day that you want to run, e.g. 'day1'")))
