@@ -13,5 +13,5 @@
 
 (defn challenge []
   (println "Day 4")
-  (println "Starts with 5: " (-mine puzzle-input 5))
-  (println "Starts with 6: " (-mine puzzle-input 6)))
+  (println "Starts with 5: " (time (-mine puzzle-input 5)))
+  (println "Starts with 6: " (time (-mine puzzle-input 6))))
