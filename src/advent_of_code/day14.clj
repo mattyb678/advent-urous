@@ -7,19 +7,19 @@
     (if-not (nil? matches)
       {:name (nth matches 1)
        :speed (read-string (nth matches 2))
-       :time (read-string (nth matches 3))
+       :fly-time (read-string (nth matches 3))
        :rest-time (read-string (nth matches 4))})))
 
 (defn- -dist-after [reindeer secs]
-  (let [speed (reindeer :speed) time (reindeer :time)
+  (let [speed (reindeer :speed) fly-time (reindeer :fly-time)
         rest-time (reindeer :rest-time)]
     (loop [time-left secs dist 0 status :flying]
       (cond
        (>= 0 time-left) dist
        (= status :flying)
-       (if (>= time-left time)
-         (recur (- time-left time) (+ dist (* time speed)) :resting)
-         (recur (- time-left time) (+ dist (* time-left speed)) :flying))
+       (if (>= time-left fly-time)
+         (recur (- time-left fly-time) (+ dist (* fly-time speed)) :resting)
+         (recur (- time-left fly-time) (+ dist (* time-left speed)) :flying))
        (= status :resting) (recur (- time-left rest-time) dist :flying)))))
 
 (defn- -input-lines [file-name]
